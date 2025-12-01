@@ -30,3 +30,14 @@ Run by:
 python app_refine.py
 ```
 To improve the accuracy of camera registration, we adjust and optimize the camera pose estimation strategy in ReconViaGen slightly.
+
+# Acknowledgement
+The origin paper:
+```
+@article{chang2025reconviagen,
+        title={ReconViaGen: Towards Accurate Multi-view 3D Object Reconstruction via Generation},
+        author={Chang, Jiahao and Ye, Chongjie and Wu, Yushuang and Chen, Yuantao and Zhang, Yidan and Luo, Zhongjin and Li, Chenghong and Zhi, Yihao and Han, Xiaoguang},
+        journal={arXiv preprint arXiv:2510.23306},
+        year={2025}
+}
+```
