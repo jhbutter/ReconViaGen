@@ -219,14 +219,15 @@ class FlowEulerSampler(Sampler):
         optimizer = torch.optim.Adam([pred_v_opt_feat], betas=(0.5, 0.9), lr=learning_rate)
         pred_v_opt = sp.SparseTensor(feats=pred_v_opt_feat, coords=pred_v.coords)
         total_steps = 5
-        input_images = F.interpolate(input_images, size=(259, 259), mode='bilinear', align_corners=False)
+        image_resolution = 259
+        input_images = F.interpolate(input_images, size=(image_resolution, image_resolution), mode='bilinear', align_corners=False)
         with tqdm(total=total_steps, disable=True, desc='Appearance (opt): optimizing') as pbar:
             for step in range(total_steps):
                 optimizer.zero_grad()
                 pred_x_0, _ = self._v_to_xstart_eps(x_t=x_t, t=t, v=pred_v_opt)
                 pred_gs = slat_decoder_gs(pred_x_0 * std + mean)
                 # pred_mesh = slat_decoder_mesh(pred_x_0 * std + mean)
-                rend_gs = render_utils.render_frames(pred_gs[0], extrinsics, intrinsics, {'resolution': 259, 'bg_color': (0, 0, 0)}, need_depth=True, opt=True)['color']
+                rend_gs = render_utils.render_frames(pred_gs[0], extrinsics, intrinsics, {'resolution': image_resolution, 'bg_color': (0, 0, 0)}, need_depth=True, opt=True)['color']
                 # rend_mesh = render_utils.render_frames_opt(pred_mesh[0], extrinsics, intrinsics, {'resolution': 518, 'bg_color': (0, 0, 0)}, need_depth=True, opt=True)['color']
                 rend_gs = torch.stack(rend_gs, dim=0)
                 loss_gs = loss_utils.l1_loss(rend_gs, input_images, size_average=False).mean(dim=(1,2,3)) + \
