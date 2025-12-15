@@ -556,7 +556,7 @@ def generate_and_extract_glb(
             target_extrinsics = torch.cat(target_extrinsics, dim=0)
             target_intrinsics = torch.cat(target_intrinsics, dim=0)
             
-            target_fitnesses_filtered = [x for x in target_fitnesses if x < 1]
+            target_fitnesses_filtered = [x for x in target_fitnesses if x <= 1]
             idx = target_fitnesses.index(max(target_fitnesses_filtered))
             target_transform = target_transforms[idx]
             down_pcd_align = copy.deepcopy(down_pcd).transform(target_transform)
