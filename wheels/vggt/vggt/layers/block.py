@@ -80,7 +80,9 @@ class Block(nn.Module):
 
     def forward(self, x: Tensor, pos=None) -> Tensor:
         def attn_residual_func(x: Tensor, pos=None) -> Tensor:
-            return self.ls1(self.attn(self.norm1(x), pos=pos))
+            normed = self.norm1(x)
+            attn_out = self.attn(normed, pos=pos)
+            return self.ls1(attn_out)
 
         def ffn_residual_func(x: Tensor) -> Tensor:
             return self.ls2(self.mlp(self.norm2(x)))

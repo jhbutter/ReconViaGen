@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+reconviagen.tar.gz
+requirements_cu118.txt
+tmp/
+weights/
