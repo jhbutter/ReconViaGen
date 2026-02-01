@@ -24,6 +24,15 @@ pip install spconv-cu{your-cuda-version}==2.3.6 xformers==0.0.27.post2
 pip install -r requirements.txt
 ```
 
+## Adaptation for H20 (CUDA 12.4)
+For users running on NVIDIA H20 GPUs with CUDA 12.4, we provide a specific requirements file `requirements_cu124.txt`. This file includes all necessary dependencies, including PyTorch, xformers, and other libraries. You do **not** need to install PyTorch separately as described in the general installation steps.
+
+One-step installation for H20:
+```bash
+# Install all dependencies (including PyTorch) for CUDA 12.4
+pip install -r requirements_cu124.txt
+```
+
 ## Local Demo 🤗
 Run by:
 ```bash
